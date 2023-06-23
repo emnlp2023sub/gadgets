@@ -30,8 +30,8 @@ class GadgetAssistedT5(GadgetAssistedModel, T5ForConditionalGeneration):
     pass
 
 
-model = GadgetAssistedT5.from_pretrained("MU-NLPC/Calc-FLAN-3B-GSM8K")
-tokenizer = T5Tokenizer.from_pretrained("MU-NLPC/Calc-FLAN-3B-GSM8K")
+model = GadgetAssistedT5.from_pretrained("emnlp2023/calc-t5-large")
+tokenizer = T5Tokenizer.from_pretrained("emnlp2023/calc-t5-large")
 
 model.prepare_for_generate(tokenizer, 
                            enabled_gadgets=[Calculator()], 
