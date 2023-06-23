@@ -1,0 +1,8 @@
+/venv/*
+*__pycache__/
+*.ipynb_checkpoints
+*wandb/*
+*models/*
+*.pyc
+data/ape210k/
+data/math_qa/
