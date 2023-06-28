@@ -7,6 +7,18 @@ Tool-assisted Language Models.
 Instructions below cover the **usage** of our tool-supported models 
 and **reproduction** of our results, models and datasets reported in the paper.
 
+#### Preliminaries
+
+Clone this repository, install the requirements and add the directory to your python path:
+
+```shell
+git clone {this repo}
+cd gadgets
+# optional; if you do not use poetry, install the latest versions of all required libraries to your venv:
+poetry install
+export PYTHONPATH="${PYTHONPATH}:$(pwd)"
+```
+
 ## Usage
 
 We wrap the `generate()` method to be able to utilize the 
