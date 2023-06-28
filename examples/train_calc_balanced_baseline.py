@@ -45,7 +45,7 @@ preprocessed_datasets = {}
 ds_to_lens = {}
 for dset_name, keys in dataset_to_keys.items():
     preprocessing_fn = preprocessing_factory(tokenizer=tokenizer, **keys)
-    dset = datasets.load_dataset(f"MU-NLPC/{dset_name}").map(preprocessing_fn)
+    dset = datasets.load_dataset(f"emnlp2023/{dset_name}").map(preprocessing_fn)
     preprocessed_datasets[dset_name] = dset
 
 

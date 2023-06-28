@@ -2,10 +2,22 @@
 
 This repo contains dataset builders, training scripts 
 and inference wrappers for training and using 
-Tool-assisted Language Models.
+Tool-assisted Language Models. 
 
-The training scripts including dataset curation can be found
-in `examples` (in progress).
+Instructions below cover the **usage** of our tool-supported models 
+and **reproduction** of our results, models and datasets reported in the paper.
+
+#### Preliminaries
+
+Clone this repository, install the requirements and add the directory to your python path:
+
+```shell
+git clone {this repo}
+cd gadgets
+# optional; if you do not use poetry, please install the latest versions of all required libraries to your venv:
+poetry install
+export PYTHONPATH="${PYTHONPATH}:$(pwd)"
+```
 
 ## Usage
 
@@ -53,4 +65,35 @@ tokenizer.decode(output_ids[0], spaces_between_special_tokens=False)
 #  Final result is<result>800</result></s>'
 ```
 
+## Reproduction
 
+### Evaluation
+
+You can reproduce the results reported in the paper by running the following commands.
+
+First, use some of the trained models to collect predictions: 
+
+```shell
+CUDA_VISIBLE_DEVICES=0 python examples/predict_calc.py --model_checkpoint emnlp2023/calc-flan-xl --dataset "emnlp2023/Calc-ape210k" --split "test" --output_jsonl predictions_calc_flan_3B.jsonl --use_gadgets
+```
+
+then, compute the accuracy of correct results with bootstrapped confidence intervals, as reported in the paper:
+
+```shell
+python examples/test_calc.py --input_jsonl predictions_calc_flan_3B.jsonl --use_gadgets
+```
+
+
+### Training
+
+You can reproduce the training of (1) **baseline models** by running 
+[examples/train_calc_balanced_baseline.py script](https://github.com/emnlp2023sub/gadgets/blob/65e24e810cf5ea20aceb8a3c8ddbc19f035ab694/examples/train_calc_balanced_baseline.py)
+and (2) **calculator-supported model** by running [examples/train_calc_balanced.py script](https://github.com/emnlp2023sub/gadgets/blob/65e24e810cf5ea20aceb8a3c8ddbc19f035ab694/examples/train_calc_balanced.py) like this:
+
+```shell
+CUDA_VISIBLE_DEVICES=0 python examples/train_calc_balanced.py
+```
+
+All parameters of the training are intentionally fixed within the script. However, note that you might need to reconfigure some parameters affecting memory usage, depending on your hardware, such as batch_size, gradient_checkpointing and gradient_accumulation steps.
+
+The training scripts also assume that you use Weights&Biases logging: reconfigure `wandb.init` by your settings, or simply remove the occurrences of `wandb` from the code if you do not wish to log.

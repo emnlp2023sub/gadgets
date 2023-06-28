@@ -46,7 +46,7 @@ gsm8k = gsm8k.map(remove_columns=['input_ids', 'attention_mask', 'labels'])
 print("AQUA: %s" % aqua)
 print("GSM8K: %s" % gsm8k)
 
-aqua.push_to_hub("MU-NLPC/Calc-aqua_rat")
-gsm8k.push_to_hub("MU-NLPC/Calc-gsm8k")
+aqua.push_to_hub("emnlp2023/Calc-aqua_rat")
+gsm8k.push_to_hub("emnlp2023/Calc-gsm8k")
 
 print("Done.")
