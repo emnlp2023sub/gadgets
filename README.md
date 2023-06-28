@@ -43,14 +43,10 @@ you can use the model using calculator gadget as follows.
 ```python
 from transformers import T5ForConditionalGeneration, T5Tokenizer
 
-from gadgets.gadget_assisted_model import GadgetAssistedModel
+from gadgets.model import gadget_assisted_model
 from gadgets.gadget import Calculator
 
-
-class GadgetAssistedT5(GadgetAssistedModel, T5ForConditionalGeneration):
-    # GadgetAssistedModel overrides the standard generate() from transformers
-    pass
-
+GadgetAssistedT5 = gadget_assisted_model(T5ForConditionalGeneration)
 
 model = GadgetAssistedT5.from_pretrained("emnlp2023/calc-t5-large")
 tokenizer = T5Tokenizer.from_pretrained("emnlp2023/calc-t5-large")
