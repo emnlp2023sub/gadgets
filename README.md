@@ -7,16 +7,26 @@ Tool-assisted Language Models.
 Instructions below cover the **usage** of our tool-supported models 
 and **reproduction** of our results, models and datasets reported in the paper.
 
-#### Preliminaries
 
-Clone this repository, install the requirements and add the directory to your python path:
+## Create environment
+
+First, clone the repo. Then run:
 
 ```shell
-git clone {this repo}
-cd gadgets
-# optional; if you do not use poetry, please install the latest versions of all required libraries to your venv:
-poetry install
-export PYTHONPATH="${PYTHONPATH}:$(pwd)"
+conda create -n gadgets python=3.11 && conda activate gadgets
+pip install poetry
+poetry install 
+```
+
+This installs all dependencies in exact same versions used by authors of the repo.
+In case you encounter any issues on your hardware (e.g. with CUDA version, platform, etc.),
+you can resolve the dependencies yourself:
+
+```shell
+# with plain pip:
+pip install -e .[dev]
+# OR with poetry:
+poetry lock && poetry install
 ```
 
 ## Usage
